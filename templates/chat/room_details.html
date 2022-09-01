@@ -1,0 +1,50 @@
+{% extends "default.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="card mb-4">
+    <div class="card-header">
+        <p class="mb-0"><b>{{ room.title}}</b></p>
+    </div>
+    <div class="card-body">
+        <p class="mb-0">Пользователи:</p>
+        {% for user in room.users.all %}
+            {{ user.username }}
+        {% endfor %}
+    </div>
+</div>
+
+<div id="messages-list">
+    {% if user in room.users.all %}
+        {% for msg in room.messages.all %}
+            <div class="pl-3">
+                <span><b>{{ msg.author.username }}</b>: {{ msg.text }}</span>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="card-body"><b>{{ user.username }}</b> не подписан на комнату <b>{{ room.title }}</b></div>
+    {% endif %}
+</div>
+
+{% if user_in_room %}
+<div class="card card-body mt-4">
+    <form id="msg-form" room-id={{ room.id }} username={{ user.username }}>
+        <input id="msg-text" name="text" type="text" placeholder="Ваше сообщение ..." required="required" class="textinput textInput form-control mb-3"></input>
+        <button type="submit" class="btn btn-outline-primary btn-sm">Отправить сообщение</button>
+    </form>
+</div>
+{% endif %}
+
+  
+{% comment %} {% if user_in_room %}
+<div class="card card-body mt-4">
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ msg_form|crispy }}
+        <button type="submit" class="btn btn-outline-primary btn-sm j-send-msg-btn">Оставить сообщение</button>
+    </form>
+</div>
+{% endif %} {% endcomment %}
+
+{% endblock content %}

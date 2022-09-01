@@ -1,0 +1,15 @@
+{% extends 'default.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Выход{% endblock title %}
+
+{% block content %}
+
+  <p class="text-center">Уверены, что хотите уйти?</p>
+
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-success w-100">Выход</button>
+  </form>
+
+{% endblock content %}

@@ -1,0 +1,8 @@
+flake8
+black
+ipython
+django
+django-debug-toolbar
+django-crispy-forms
+crispy-bootstrap5
+channels

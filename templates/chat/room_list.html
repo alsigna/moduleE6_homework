@@ -1,0 +1,10 @@
+{% extends "default.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+{% for room in rooms %}
+    {% include "chat/inc/room_list_card.html" with room=room %}
+{% endfor %}
+
+{% endblock content %}

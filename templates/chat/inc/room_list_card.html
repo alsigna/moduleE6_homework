@@ -1,0 +1,28 @@
+{% load crispy_forms_tags %}
+
+<div class="card mb-4">
+    <div class="card-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <a href={% url 'chat:room_details' room.id %}><b>{{ room.title }}</b></a>
+                <span class="j-new-msg-notif" username={{ user.username }} room-id={{ room.id }}></span>
+            </div>
+            <div class="col text-right">
+                {% if user.is_authenticated %}
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        {% if room.user_in_room %}                                
+                            <button type="submit" class="btn btn-outline-dark btn-sm" name="_leave" value="{{ room.pk }}">
+                                <span aria-hidden="true">Отписаться</span>
+                            </button>
+                        {% else %}
+                            <button type="submit" class="btn btn-outline-dark btn-sm" name="_join" value="{{ room.pk }}">
+                                <span aria-hidden="true">Подписаться</span>
+                            </button>
+                        {% endif %}
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
