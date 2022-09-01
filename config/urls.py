@@ -22,6 +22,8 @@ urlpatterns = [
     path("", include("chat.urls")),
     path("account/", include("account.urls")),
     path("admin/", admin.site.urls),
+    path("api/", include("api.urls")),
+    # path("api-auth/", include("rest_framework.urls")),
 ]
 
 
